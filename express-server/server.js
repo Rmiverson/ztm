@@ -4,12 +4,15 @@ const app = express();
 
 // middleware
 // does stuff inbetween requests
-app.use((req, res, next) => {
-  console.log("hello")
+// app.use((req, res, next) => {
+  // console.log("hello")
 
   // lets the request continue
-  next()
-})
+  // next()
+// })
+
+app.use(express.urlencoded({extended:false}));
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send("getting root")
@@ -25,12 +28,9 @@ app.get('/profile', (req, res) => {
 });
 
 app.post('/profile', (req, res) => {
-  const user = {
-    name: 'riley',
-    hobby: 'photography'
-  }
+  console.log(req.body)
 
-  res.send(user)
+  res.send('success')
 })
 
 app.listen(3000);

@@ -1,4 +1,10 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// needed toj add these things for dirname to work properly with js modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -11,26 +17,46 @@ const app = express();
   // next()
 // })
 
-app.use(express.urlencoded({extended:false}));
-app.use(express.json())
+// app.use(express.urlencoded({extended:false}));
+// app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send("getting root")
-});
+app.use(express.static(__dirname + '/public'))
 
-app.get('/profile', (req, res) => {
-  const user = {
-    name: 'riley',
-    hobby: 'photography'
-  }
+// app.get('/', (req, res) => {
+  // req.query
+  // what we get when we use a get query
+  // console.log(req.query)
 
-  res.send(user)
-});
+  // req.body
+  // what the request sends in its body
 
-app.post('/profile', (req, res) => {
-  console.log(req.body)
+  // req.header
+  // gets some of the meta data and extra information that the request sends
+  // console.log(req.header) recieves a function
 
-  res.send('success')
-})
+  // req.params
+  // a syntax of the parameters of the url
+  // console.log(req.params)
+
+  // res.status
+  // adds a status to the response
+
+//   res.send()
+// });
+
+// app.get('/profile', (req, res) => {
+//   const user = {
+//     name: 'riley',
+//     hobby: 'photography'
+//   }
+
+//   res.send(user)
+// });
+
+// app.post('/profile', (req, res) => {
+//   console.log(req.body)
+
+//   res.send('success')
+// })
 
 app.listen(3000);

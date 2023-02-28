@@ -2,6 +2,15 @@ import express from 'express';
 
 const app = express();
 
+// middleware
+// does stuff inbetween requests
+app.use((req, res, next) => {
+  console.log("hello")
+
+  // lets the request continue
+  next()
+})
+
 app.get('/', (req, res) => {
   res.send("getting root")
 });
